@@ -87,52 +87,28 @@ endmodule
 
 4:1 MUX Data Flow Implementation
 ~~~
- module mux4to1_dataflow(
-    input wire i0, i1, i2, i3,  
-    input wire s0, s1,          
-    output wire y              
-);
-
-    // Dataflow implementation using a continuous assignment statement
-    assign y = (~s1 & ~s0 & i0);
-               (~s1 &  s0 & i1);
-               ( s1 & ~s0 & i2); 
-               ( s1 &  s0 & i3);   
-
+module dataflow(a,b,c,d,s1,s0,y);
+input a,b,c,d,s1,s0;
+output y;
+assign y = (~s1 & ~s0 & a) | (~s1 & s0 & b) | (s1 & ~s0 & c) | (s1 & s0 & d);
 endmodule
 ~~~
 ![DATA](https://github.com/user-attachments/assets/4c983ea1-9acd-4ba0-98a7-3e3637db6875)
 
 4:1 MUX Behavioral Implementation
 ~~~
-module mux4to1(I,S,Y);
-
-input [3:0]I;
-
-input [1:0]S;
-
+module behavior(A,B,C,D,S1,S0,Y);
+input A,B,C,D,S1,S0;
 output reg Y;
-
-always@(I,S)
-
+always @(*)
 begin
-
-case(S)
-
-2'b00:Y=I[0];
-
-2'b01:Y=I[1];
-
-2'b10:Y=I[2];
-
-2'b11:Y=I[3];
-
-default:$monitor("The value of s is %b",S);
-
+case ({S1, S0})
+                2'b00: Y = A;
+                2'b01: Y = B;
+                2'b10: Y = C;
+                2'b11: Y = D;
 endcase
-
 end
-
 endmodule
 ~~~
 
@@ -140,14 +116,11 @@ endmodule
 
 4:1 MUX Structural Implementation
 ~~~
-module mux4to1stucturalimplementation(I,S,Y);
-input [3:0]I;
-input [1:0]S;
-output reg Y;
-always @(I,S)
-begin
- Y <= (S[1] ? (S[0] ? I[3] : I[2]) : (S[0] ? I[1] : I[0]));
- end
+module mux_4to1 (a,b,c,d,S0,S1,Y);
+input a,b,c,d;
+input S0, S1;
+output Y ;
+assign Y = (S1 == 0 && S0 == 0) ? a :(S1 == 0 && S0 == 1) ? b :(S1 == 1 && S0 == 0) ? c :(S1 == 1 && S0 == 1) ? d;
 endmodule
 ~~~
 ![STRU](https://github.com/user-attachments/assets/ba3ccc90-0f81-4a56-83cb-ebfd152bff86)
