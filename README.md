@@ -70,6 +70,7 @@ wire [4:1]w;
 and g1(w[1],~s[1],~s[0],a);
 and g2(w[2],~s[1],s[0],b); and g3(w[3],s[1],~s[0],c);
 and g4(w[4],s[1],s[0],d); or g5(y,w[1],w[2],w[3],w[4]);
+~~~
 ![1](https://github.com/user-attachments/assets/c5d42a9d-2829-401f-a2d2-86740ea1efdc)
 
 
