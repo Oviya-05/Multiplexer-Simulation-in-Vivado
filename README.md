@@ -82,7 +82,8 @@ module mux4to1_gate(
     or (y, and0, and1, and2, and3);
 endmodule
 ~~~
-![WhatsApp Image 2024-09-26 at 10 43 01 AM (1)](https://github.com/user-attachments/assets/386281b0-ebad-49c1-a2ed-8d6b1134e213)
+![GATE](https://github.com/user-attachments/assets/8e516fc8-9d3d-40b3-ad93-c9bbff72fcc7)
+
 
 4:1 MUX Data Flow Implementation
 ~~~
@@ -100,6 +101,7 @@ endmodule
 
 endmodule
 ~~~
+![DATA](https://github.com/user-attachments/assets/4c983ea1-9acd-4ba0-98a7-3e3637db6875)
 
 4:1 MUX Behavioral Implementation
 ~~~
@@ -134,6 +136,7 @@ end
 endmodule
 ~~~
 
+![beh](https://github.com/user-attachments/assets/213bb30e-8d41-4a53-a8f3-b3cbe5a36bd7)
 
 4:1 MUX Structural Implementation
 ~~~
@@ -147,7 +150,7 @@ begin
  end
 endmodule
 ~~~
-![str](https://github.com/user-attachments/assets/d4ad97ea-4acf-4c35-8c62-4023a1451304)
+![STRU](https://github.com/user-attachments/assets/ba3ccc90-0f81-4a56-83cb-ebfd152bff86)
 
 Testbench Implementation
 
