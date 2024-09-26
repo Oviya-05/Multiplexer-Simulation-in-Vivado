@@ -62,107 +62,92 @@ Truth Table
 Verilog Code
 
 4:1 MUX Gate-Level Implementation
-
-// mux4_to_1_gate.v
-module mux4_to_1_gate (
-    input wire A,
-    input wire B,
-    input wire C,
-    input wire D,
-    input wire S0,
-    input wire S1,
-    output wire Y
+~~~
+module mux4to1_gate(
+    input wire i0, i1, i2, i3,  
+    input wire s0, s1,          
+    output wire y              
 );
-    wire not_S0, not_S1;
-    wire A_and, B_and, C_and, D_and;
 
-    // Inverters for select lines
-    not (not_S0, S0);
-    not (not_S1, S1);
+    wire not_s0, not_s1;
+    wire and0, and1, and2, and3;
 
-    // AND gates for each input with select lines
-    and (A_and, A, not_S1, not_S0);
-    and (B_and, B, not_S1, S0);
-    and (C_and, C, S1, not_S0);
-    and (D_and, D, S1, S0);
-
-    // OR gate to combine all AND gate outputs
-    or (Y, A_and, B_and, C_and, D_and);
+    // Invert select signals
+    not (not_s0, s0);
+    not (not_s1, s1);
+    and (and0, i0, not_s1, not_s0);  
+    and (and1, i1, not_s1, s0);      
+    and (and2, i2, s1, not_s0);      
+    and (and3, i3, s1, s0);          
+    or (y, and0, and1, and2, and3);
 endmodule
+~~~
+![WhatsApp Image 2024-09-26 at 10 43 01 AM (1)](https://github.com/user-attachments/assets/386281b0-ebad-49c1-a2ed-8d6b1134e213)
 
 4:1 MUX Data Flow Implementation
-
-// mux4_to_1_dataflow.v
-module mux4_to_1_dataflow (
-    input wire A,
-    input wire B,
-    input wire C,
-    input wire D,
-    input wire S0,
-    input wire S1,
-    output wire Y
+~~~
+ module mux4to1_dataflow(
+    input wire i0, i1, i2, i3,  
+    input wire s0, s1,          
+    output wire y              
 );
-    assign Y = (~S1 & ~S0 & A) |
-               (~S1 & S0 & B) |
-               (S1 & ~S0 & C) |
-               (S1 & S0 & D);
+
+    // Dataflow implementation using a continuous assignment statement
+    assign y = (~s1 & ~s0 & i0);
+               (~s1 &  s0 & i1);
+               ( s1 & ~s0 & i2); 
+               ( s1 &  s0 & i3);   
+
 endmodule
+~~~
 
 4:1 MUX Behavioral Implementation
+~~~
+module mux4to1(I,S,Y);
 
-// mux4_to_1_behavioral.v
-module mux4_to_1_behavioral (
-    input wire A,
-    input wire B,
-    input wire C,
-    input wire D,
-    input wire S0,
-    input wire S1,
-    output reg Y
-);
-    always @(*) begin
-        case ({S1, S0})
-            2'b00: Y = A;
-            2'b01: Y = B;
-            2'b10: Y = C;
-            2'b11: Y = D;
-            default: Y = 1'bx; // Undefined
-        endcase
-    end
+input [3:0]I;
+
+input [1:0]S;
+
+output reg Y;
+
+always@(I,S)
+
+begin
+
+case(S)
+
+2'b00:Y=I[0];
+
+2'b01:Y=I[1];
+
+2'b10:Y=I[2];
+
+2'b11:Y=I[3];
+
+default:$monitor("The value of s is %b",S);
+
+endcase
+
+end
+
 endmodule
+~~~
+
 
 4:1 MUX Structural Implementation
-
-// mux2_to_1.v
-module mux2_to_1 (
-    input wire A,
-    input wire B,
-    input wire S,
-    output wire Y
-);
-    assign Y = S ? B : A;
+~~~
+module mux4to1stucturalimplementation(I,S,Y);
+input [3:0]I;
+input [1:0]S;
+output reg Y;
+always @(I,S)
+begin
+ Y <= (S[1] ? (S[0] ? I[3] : I[2]) : (S[0] ? I[1] : I[0]));
+ end
 endmodule
-
-
-// mux4_to_1_structural.v
-module mux4_to_1_structural (
-    input wire A,
-    input wire B,
-    input wire C,
-    input wire D,
-    input wire S0,
-    input wire S1,
-    output wire Y
-);
-    wire mux_low, mux_high;
-
-    // Instantiate two 2:1 MUXes
-    mux2_to_1 mux0 (.A(A), .B(B), .S(S0), .Y(mux_low));
-    mux2_to_1 mux1 (.A(C), .B(D), .S(S0), .Y(mux_high));
-
-    // Instantiate the final 2:1 MUX
-    mux2_to_1 mux_final (.A(mux_low), .B(mux_high), .S(S1), .Y(Y));
-endmodule
+~~~
+![str](https://github.com/user-attachments/assets/d4ad97ea-4acf-4c35-8c62-4023a1451304)
 
 Testbench Implementation
 
