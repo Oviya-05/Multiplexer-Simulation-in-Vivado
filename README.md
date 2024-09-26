@@ -63,26 +63,14 @@ Verilog Code
 
 4:1 MUX Gate-Level Implementation
 ~~~
-module mux4to1_gate(
-    input wire i0, i1, i2, i3,  
-    input wire s0, s1,          
-    output wire y              
-);
-
-    wire not_s0, not_s1;
-    wire and0, and1, and2, and3;
-
-    // Invert select signals
-    not (not_s0, s0);
-    not (not_s1, s1);
-    and (and0, i0, not_s1, not_s0);  
-    and (and1, i1, not_s1, s0);      
-    and (and2, i2, s1, not_s0);      
-    and (and3, i3, s1, s0);          
-    or (y, and0, and1, and2, and3);
-endmodule
-~~~
-![GATE](https://github.com/user-attachments/assets/8e516fc8-9d3d-40b3-ad93-c9bbff72fcc7)
+module mux4_to_1_gate (a,b,c,d,s,y);
+input a,b,c,d;
+output y;
+wire [4:1]w;
+and g1(w[1],~s[1],~s[0],a);
+and g2(w[2],~s[1],s[0],b); and g3(w[3],s[1],~s[0],c);
+and g4(w[4],s[1],s[0],d); or g5(y,w[1],w[2],w[3],w[4]);
+![1](https://github.com/user-attachments/assets/c5d42a9d-2829-401f-a2d2-86740ea1efdc)
 
 
 4:1 MUX Data Flow Implementation
