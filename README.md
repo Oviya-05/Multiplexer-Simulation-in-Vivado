@@ -82,7 +82,7 @@ output y;
 assign y = (~s1 & ~s0 & a) | (~s1 & s0 & b) | (s1 & ~s0 & c) | (s1 & s0 & d);
 endmodule
 ~~~
-![DATA](https://github.com/user-attachments/assets/4c983ea1-9acd-4ba0-98a7-3e3637db6875)
+![2](https://github.com/user-attachments/assets/af569091-9e61-41e6-b8b6-6c0b480367dd)
 
 4:1 MUX Behavioral Implementation
 ~~~
