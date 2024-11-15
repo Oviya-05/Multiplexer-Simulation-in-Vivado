@@ -90,6 +90,7 @@ endmodule
 
 
 **4:1 MUX Behavioral Implementation:**
+
 ~~~
 module behavior(A,B,C,D,S1,S0,Y);
 input A,B,C,D,S1,S0;
