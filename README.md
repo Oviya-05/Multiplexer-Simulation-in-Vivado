@@ -1,11 +1,9 @@
 **SIMULATION AND IMPLEMENTATION OF LOGIC GATES**
 
 **AIM:**
-
 To design and simulate a 4:1 Multiplexer (MUX) using Verilog HDL in four different modeling styles—Gate-Level, Data Flow, Behavioral, and Structural—and to verify its functionality through a testbench using the Vivado 2023.1 simulation environment. The experiment aims to understand how different abstraction levels in Verilog can be used to describe the same digital logic circuit and analyze their performance.
 
 **APPARATUS REQUIRED:**
-
 Vivado 2023.1
 
 **PROCEDURE:**
@@ -55,17 +53,13 @@ You can include the timing diagram from the simulation window showing the correc
 Once done, close the simulation by going to Simulation → "Close Simulation".
 
 **Logic Diagram:**
-
 ![image](https://github.com/user-attachments/assets/d4ab4bc3-12b0-44dc-8edb-9d586d8ba856)
 
 **Truth Table:**
-
 ![image](https://github.com/user-attachments/assets/c850506c-3f6e-4d6b-8574-939a914b2a5f)
 
 **Verilog Code:**
-
 **4:1 MUX Gate-Level Implementation**
-
 ~~~
 module mux4_to_1_gate (a,b,c,d,s,y);
 input a,b,c,d;
@@ -81,7 +75,6 @@ and g4(w[4],s[1],s[0],d); or g5(y,w[1],w[2],w[3],w[4]);
 
 
 **4:1 MUX Data Flow Implementation**
-
 ~~~
 module dataflow(a,b,c,d,s1,s0,y);
 input a,b,c,d,s1,s0;
@@ -95,7 +88,6 @@ endmodule
 
 
 **4:1 MUX Behavioral Implementation:**
-
 ~~~
 module behavior(A,B,C,D,S1,S0,Y);
 input A,B,C,D,S1,S0;
@@ -117,7 +109,6 @@ endmodule
 
 
 **4:1 MUX Structural Implementation:**
-
 ~~~
 module mux_4to1 (a,b,c,d,S0,S1,Y);
 input a,b,c,d;
@@ -221,9 +212,9 @@ module mux4_to_1_tb;
     end
 endmodule
 ~~~
-**Output:**
-![Uploading image.png…]()
 
+**Output:**
+![image](https://github.com/user-attachments/assets/ebb83ef3-3844-4f9a-9809-ae9a681feca6)
 
 **Conclusion:**
 
