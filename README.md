@@ -1,4 +1,4 @@
-# SIMULATION AND IMPLEMENTATION OF LOGIC GATES
+# 4:1 Multiplexer using Verilog HDL
 
 **AIM:**
 
