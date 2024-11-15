@@ -74,6 +74,7 @@ and g1(w[1],~s[1],~s[0],a);
 and g2(w[2],~s[1],s[0],b); and g3(w[3],s[1],~s[0],c);
 and g4(w[4],s[1],s[0],d); or g5(y,w[1],w[2],w[3],w[4]);
 ~~~
+Output:
 ![1](https://github.com/user-attachments/assets/c5d42a9d-2829-401f-a2d2-86740ea1efdc)
 
 
@@ -85,6 +86,7 @@ output y;
 assign y = (~s1 & ~s0 & a) | (~s1 & s0 & b) | (s1 & ~s0 & c) | (s1 & s0 & d);
 endmodule
 ~~~
+Output:
 ![2](https://github.com/user-attachments/assets/055e61d4-215f-4475-9c27-a04460c23eec)
 
 
@@ -106,6 +108,7 @@ end
 endmodule
 ~~~
 
+Output:
 ![beh](https://github.com/user-attachments/assets/213bb30e-8d41-4a53-a8f3-b3cbe5a36bd7)
 
 4:1 MUX Structural Implementation
@@ -117,7 +120,9 @@ output Y ;
 assign Y = (S1 == 0 && S0 == 0) ? a :(S1 == 0 && S0 == 1) ? b :(S1 == 1 && S0 == 0) ? c :(S1 == 1 && S0 == 1) ? d;
 endmodule
 ~~~
-![Uploading image.png…]()
+
+Output:
+![beh](https://github.com/user-attachments/assets/213bb30e-8d41-4a53-a8f3-b3cbe5a36bd7)
 
 
 Testbench Implementation
@@ -210,15 +215,9 @@ module mux4_to_1_tb;
     end
 endmodule
 ~~~
+Output:
+![Uploading image.png…]()
 
-Sample Output
-
-Time=0 | S1=0 S0=0 | Inputs: A=0 B=0 C=0 D=0 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
-Time=10 | S1=0 S0=0 | Inputs: A=0 B=0 C=0 D=0 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
-Time=20 | S1=0 S0=0 | Inputs: A=0 B=0 C=0 D=1 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
-Time=30 | S1=0 S0=1 | Inputs: A=0 B=0 C=0 D=1 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
-Time=40 | S1=1 S0=0 | Inputs: A=0 B=0 C=0 D=1 | Y_gate=0 | Y_dataflow=0 | Y_behavioral=0 | Y_structural=0
-...
 
 Conclusion:
 
