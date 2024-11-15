@@ -1,9 +1,11 @@
 **SIMULATION AND IMPLEMENTATION OF LOGIC GATES**
 
 **AIM:**
+
 To design and simulate a 4:1 Multiplexer (MUX) using Verilog HDL in four different modeling styles—Gate-Level, Data Flow, Behavioral, and Structural—and to verify its functionality through a testbench using the Vivado 2023.1 simulation environment. The experiment aims to understand how different abstraction levels in Verilog can be used to describe the same digital logic circuit and analyze their performance.
 
 **APPARATUS REQUIRED:**
+
 Vivado 2023.1
 
 **PROCEDURE:**
@@ -124,92 +126,37 @@ endmodule
 
 **Testbench Implementation:**
 
-// mux4_to_1_tb.v
 ~~~
-`timescale 1ns / 1ps
+module multiplexer_tb;
+ // Declare inputs as reg and outputs as wire
+ reg s1, s0, a, b, c, d;
+ wire y;
 
-module mux4_to_1_tb;
-    // Inputs
-    reg A;
-    reg B;
-    reg C;
-    reg D;
-    reg S0;
-    reg S1;
+ // Instantiate the multiplexer module
+ multiplexer uut (
+   .s1(s1), 
+   .s0(s0), 
+   .a(a), 
+   .b(b), 
+   .c(c), 
+   .d(d), 
+   .y(y)
+ );
 
-    // Outputs
-    wire Y_gate;
-    wire Y_dataflow;
-    wire Y_behavioral;
-    wire Y_structural;
-
-    // Instantiate the Gate-Level MUX
-    mux4_to_1_gate uut_gate (
-        .A(A),
-        .B(B),
-        .C(C),
-        .D(D),
-        .S0(S0),
-        .S1(S1),
-        .Y(Y_gate)
-    );
-
-    // Instantiate the Data Flow MUX
-    mux4_to_1_dataflow uut_dataflow (
-        .A(A),
-        .B(B),
-        .C(C),
-        .D(D),
-        .S0(S0),
-        .S1(S1),
-        .Y(Y_dataflow)
-    );
-
-    // Instantiate the Behavioral MUX
-    mux4_to_1_behavioral uut_behavioral (
-        .A(A),
-        .B(B),
-        .C(C),
-        .D(D),
-        .S0(S0),
-        .S1(S1),
-        .Y(Y_behavioral)
-    );
-
-    // Instantiate the Structural MUX
-    mux4_to_1_structural uut_structural (
-        .A(A),
-        .B(B),
-        .C(C),
-        .D(D),
-        .S0(S0),
-        .S1(S1),
-        .Y(Y_structural)
-    );
-
-    // Test vectors
-    initial begin
-        // Initialize Inputs
-        A = 0; B = 0; C = 0; D = 0; S0 = 0; S1 = 0;
-
-        // Apply test cases
-        #10 {S1, S0, A, B, C, D} = 6'b00_0000; // Y = A = 0
-        #10 {S1, S0, A, B, C, D} = 6'b00_0001; // Y = A = 1
-        #10 {S1, S0, A, B, C, D} = 6'b01_0010; // Y = B = 1
-        #10 {S1, S0, A, B, C, D} = 6'b10_0100; // Y = C = 1
-        #10 {S1, S0, A, B, C, D} = 6'b11_1000; // Y = D = 1
-        #10 {S1, S0, A, B, C, D} = 6'b01_1100; // Y = B = 1
-        #10 {S1, S0, A, B, C, D} = 6'b10_1010; // Y = C = 1
-        #10 {S1, S0, A, B, C, D} = 6'b11_0110; // Y = D = 1
-        #10 {S1, S0, A, B, C, D} = 6'b00_1111; // Y = A = 1
-        #10 $stop;
-    end
-
-    // Monitor the outputs
-    initial begin
-        $monitor("Time=%0t | S1=%b S0=%b | Inputs: A=%b B=%b C=%b D=%b | Y_gate=%b | Y_dataflow=%b | Y_behavioral=%b | Y_structural=%b",
-                 $time, S1, S0, A, B, C, D, Y_gate, Y_dataflow, Y_behavioral, Y_structural);
-    end
+ // Test cases
+ initial begin
+   // Monitor changes in inputs and output
+   $monitor("s1 = %b, s0 = %b, a = %b, b = %b, c = %b, d = %b, y = %b", s1, s0, a, b, c, d, y);
+   
+   // Apply test vectors
+   s1 = 0; s0 = 0; a = 1; b = 0; c = 0; d = 0; #10;  // Test case 1
+   s1 = 0; s0 = 1; a = 0; b = 1; c = 0; d = 0; #10;  // Test case 2
+   s1 = 1; s0 = 0; a = 0; b = 0; c = 1; d = 0; #10;  // Test case 3
+   s1 = 1; s0 = 1; a = 0; b = 0; c = 0; d = 1; #10;  // Test case 4
+   
+   // Finish simulation
+   $finish;
+ end
 endmodule
 ~~~
 
