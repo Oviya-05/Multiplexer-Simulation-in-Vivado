@@ -131,7 +131,7 @@ endmodule
 ![beh](https://github.com/user-attachments/assets/213bb30e-8d41-4a53-a8f3-b3cbe5a36bd7)
 
 
-Testbench Implementation
+**Testbench Implementation:**
 
 // mux4_to_1_tb.v
 ~~~
